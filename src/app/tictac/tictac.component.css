@@ -1,0 +1,11 @@
+#grid-container {
+  width: 100%;
+  display: grid;
+  grid-row-gap: 15px;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;  
+}
+
+.conquered {
+  font-size: 28px;
+}

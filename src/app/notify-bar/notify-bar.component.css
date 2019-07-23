@@ -1,0 +1,67 @@
+.notify-bar {
+	width: 100%;
+	height: 40px;
+	background-color: #2bff00;
+    z-index: 1000;
+    position: absolute;	
+	top: -40px;	
+}
+
+.notify-bar p {
+	position: relative;
+    top: 50%;
+	text-align: center;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);	
+}
+
+.hide {
+    -webkit-animation-name: hideNotification;
+    animation-name: hideNotification;
+}
+
+.show {
+    -webkit-animation-name: showNotification;
+    animation-name: showNotification;	
+}
+
+.stick {
+    -webkit-animation-name: stickNotification;
+    animation-name: stickNotification;	
+}
+
+.stick, .show, .hide {
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-duration: 0.2s;
+	-webkit-animation-animation-fill-mode: forwards;
+		
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-duration: 0.2s;	
+	animation-fill-mode: forwards;		
+}
+
+
+@keyframes showNotification {
+    from {top: -40px; }
+    to {top: 0; }
+}
+
+/* WebKit and Opera browsers */
+@-webkit-keyframes showNotification {
+	from { top: -40px; }
+	to   { top: 0; }
+}
+
+@keyframes hideNotification {
+    from { top: 0; }
+    to { top: -40px; }
+}
+
+/* WebKit and Opera browsers */
+@-webkit-keyframes hideNotification {
+	from { top: 0; }
+	to   { -webkit-transform: -40px; }
+}

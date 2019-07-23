@@ -1,0 +1,43 @@
+/* .toast {
+	background: #504b4b;
+	color: white;
+	border-radius: 50px;
+    width: fit-content;
+    margin: 5px auto;
+    padding: 5px;
+	opacity: 0;
+	animation: show 3s forwards;
+}
+
+@keyframes show {
+	0% {opacity: 0;}
+	50%{opacity: 1;}
+	100%{opacity: 0;}
+} */
+
+.close {
+	position: absolute;
+	right: 0;
+	cursor: pointer;
+}
+
+.container {
+	background-color: aquamarine;
+	margin: 0 20px;
+	position: relative;
+	top: -5px;
+    font-size: 20px;
+}
+
+.active {
+	display: block;
+}
+
+.hide {
+	display: none;
+}
+
+p {
+	display: inline;
+	text-align: center;
+}

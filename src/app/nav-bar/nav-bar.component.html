@@ -1,0 +1,7 @@
+<div class="container">
+
+	<button *ngIf="_sharedService.user && _sharedService.user.uid" (click)="logout();">logout</button>
+
+	<button *ngIf="!_sharedService.user" (click)="goToLoginScreen();">login</button>
+	
+</div>

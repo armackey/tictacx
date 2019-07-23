@@ -1,0 +1,12 @@
+
+<div class="board grid" [ngClass]="{ 'active': _board.boardNumber === bService.activeBoard }" #board>
+
+	<span
+		*ngFor="let square of _board.squares; let i = index" 
+		class="cell-{{ i }}"
+		(click)="selected($event, {board: _board.boardNumber, square: square }, index)">{{ square.symbol }}
+	</span>
+
+	<span class="symbol" [ngClass]="{ 'won': true }" *ngIf="_board.winningSymbol">{{ _board.winningSymbol }}</span>
+
+</div>

@@ -1,0 +1,56 @@
+body {text-align: center;}
+#grid-container {
+	width: 100%;
+	display: grid;
+	grid-row-gap: 15px;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;  
+}
+
+button {
+	display: block;
+}
+
+.conquered {
+	font-size: 28px;
+}
+
+.tictac {
+	width: 200px;
+	height: 200px;
+	background-color: red;
+	display: block;
+	margin: 0 auto;
+}
+
+/* #header span{
+  font-size: 40px;
+}
+#header, #footer {
+  text-align: center;
+  margin: 24px auto;
+} */
+
+/* .grid span {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 60px;
+  border: 2px solid #ffa94d;
+} */
+
+/* .opac, .grid {
+  opacity: 0.6;
+  background-color: black;
+} */
+
+.container {
+	position: relative;
+}
+
+.modal {
+	z-index: 1000;
+	position: absolute;
+	width: 100%;
+}

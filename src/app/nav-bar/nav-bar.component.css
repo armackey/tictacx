@@ -1,0 +1,11 @@
+.container {
+	width: 100%;
+	background-color: aqua;
+	min-height: 40px;
+	position: relative;
+}
+
+button {
+	position: absolute;
+	right: 0;
+}

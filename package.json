@@ -1,0 +1,83 @@
+{
+  "name": "tictacx",
+  "nativescript": {
+    "id": "org.nativescript.tictacx",
+    "tns-android": {
+      "version": "5.3.1"
+    },
+    "tns-ios": {
+      "version": "5.3.1"
+    }
+  },
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "android": "tns run android --bundle",
+    "ios": "tns run ios --bundle",
+    "mobile": "tns run --bundle",
+    "preview": "tns preview --bundle",
+    "dev-serve": "npm run dev-build && ng build && ng run tictacx:server && npm run serve",
+    "prod": "npm run dev-build && ng build --prod && ng run tictacx:server && npm run serve",
+    "heroku-postbuild": "ng build --prod",
+    "serve": "node server/dist/index.js",
+    "dev-build": "tsc ./server/**/*.ts"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^8.1.0",
+    "@angular/cdk": "^8.0.2",
+    "@angular/common": "^8.1.0",
+    "@angular/compiler": "^8.1.0",
+    "@angular/core": "^8.1.0",
+    "@angular/fire": "^5.1.2",
+    "@angular/flex-layout": "^8.0.0-beta.26",
+    "@angular/forms": "^8.1.0",
+    "@angular/material": "^8.0.2",
+    "@angular/platform-browser": "^8.1.0",
+    "@angular/platform-browser-dynamic": "^8.1.0",
+    "@angular/platform-server": "^8.0.0",
+    "@angular/router": "^8.1.0",
+    "@types/node-fetch": "^2.3.6",
+    "core-js": "^3.1.4",
+    "firebase": "^6.2.4",
+    "nativescript-angular": "~8.0.1",
+    "nativescript-plugin-firebase": "^9.0.1",
+    "nativescript-theme-core": "~1.0.4",
+    "reflect-metadata": "~0.1.12",
+    "rxjs": "^6.5.2",
+    "tns-core-modules": "^5.3.1",
+    "typescript": "^3.4.4",
+    "zone.js": "~0.9.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.801.0",
+    "@angular/cli": "^8.1.0",
+    "@angular/compiler-cli": "^8.1.0",
+    "@angular/language-service": "^8.1.0",
+    "@nativescript/schematics": "~0.6.0",
+    "@types/jasmine": "^3.3.13",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.0.10",
+    "codelyzer": "^5.0.1",
+    "jasmine-core": "^3.4.0",
+    "jasmine-spec-reporter": "^4.2.1",
+    "karma": "^4.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^2.0.0",
+    "karma-coverage-istanbul-reporter": "~2.0.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-jasmine-html-reporter": "^1.4.2",
+    "nativescript-dev-typescript": "~0.10.0",
+    "nativescript-dev-webpack": "^0.24.1",
+    "node-sass": "^4.12.0",
+    "protractor": "^5.4.2",
+    "rxjs-tslint": "^0.1.7",
+    "ts-node": "~8.3.0",
+    "tslint": "^5.18.0"
+  }
+}

@@ -1,0 +1,8 @@
+<div 
+	[ngClass]="{ 
+		'show': sharedService.notifyMessage, 
+		'hide': sharedService.notifyMessage === '' 
+	}" 
+	class="notify-bar">
+	<p class="white">{{ sharedService.notifyMessage }}</p>
+</div>

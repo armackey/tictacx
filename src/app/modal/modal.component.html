@@ -1,0 +1,23 @@
+
+<div class="container">
+
+	<p class="close f18" (click)="close()">x</p>
+
+	how to play
+
+	<div>
+		
+		<p
+			#instuctList
+			[ngClass]="{ 'active': i === 0, 'hide': i !== 0 }" 
+			*ngFor="let instruction of instructions; let i = index">
+			{{ instruction }}
+		</p>
+		
+	</div>
+
+	<button (click)="prev()" [disabled]="!current">previous</button>
+
+	<button (click)="next()">next</button>
+	
+</div>

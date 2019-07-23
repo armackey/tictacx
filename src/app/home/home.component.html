@@ -1,0 +1,26 @@
+<div class="container">
+	
+	<app-modal 
+		class="modal"
+		*ngIf="modalTypeSent"
+		[modalTypeRecieved]="modalTypeSent"
+		(closeModalEvent)="receivedClosedModal($event)">
+	</app-modal>
+
+	<p class="center f20">pick a game</p>
+
+	<div>
+
+		<img class="tictac" />
+		
+		<button class="center" (click)="renderGame('tictac', 2);">tictac 1v1</button>
+
+		<button class="center" (click)="renderGame('tictac', 4);">tictac 2v2</button>
+
+		<button class="center" (click)="findGame('tictac', 2);">find a game 1v1</button>
+
+		<button class="center" (click)="renderHowToModal('tictac');">how to play</button>
+
+	</div>
+	
+</div>
