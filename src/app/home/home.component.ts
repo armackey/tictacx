@@ -118,36 +118,5 @@ export class HomeComponent implements OnInit {
 		this.modalTypeSent = modalType;
 
 	}
-	
-
-	getUserPosition(): void {
-		console.log('user clicked');
-		this.http.post(`${SERVER_HOST}/getUserPosition`, {}).toPromise().then((r)=>{
-			console.log(r);
-		});
-	}
-	getUserLinkedInProfile(): void {
-		this.http.post(`${SERVER_HOST}/getUserLinkedInProfile`, {}).toPromise().then(r => {
-			console.log(r);
-		})
-	}
-
-	getUserPicture(): void {
-		this.http.post(`${SERVER_HOST}/getUserPicture`, {}).toPromise().then(r => {
-			console.log(r);
-		})
-	}
-
-	logout(): void {
-		this.http.get(`${SERVER_HOST}/oauth/logout`).toPromise()
-		.then(r => {
-			console.log('logged out');
-			console.log(r);
-			this._router.navigate(['login']);
-		})
-		.catch(e => {
-			console.log(e);
-		})
-	}
 
 }
