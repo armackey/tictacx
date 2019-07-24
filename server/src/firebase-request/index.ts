@@ -18,7 +18,7 @@ function createGameId(req, res) {
 
 	let gameId = firebase.database().ref().child(gameType).push('').key;
 
-	firebase.database().ref().child(`/users/${uid}/${gameType}`).push(gameId);
+	firebase.database().ref().child(`/active-games/${uid}/${gameType}`).push(gameId);
 
 	firebase.database().ref().child(`${gameType}/${gameId}/`).set({
 		gameId,

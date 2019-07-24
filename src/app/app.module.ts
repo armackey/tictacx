@@ -41,15 +41,11 @@ const APP_ID = 'tictacx';
 		HttpClientModule,
 		BrowserTransferStateModule,
 		BrowserModule.withServerTransition({ appId: APP_ID }),
-		// TictacModule,
 	],
 	providers: [
 		UserService,
 		SharedService,
 	],
-	// entryComponents: [
-	// 	TictacComponent
-	// ],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

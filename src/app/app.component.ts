@@ -21,13 +21,11 @@ export class AppComponent implements OnInit {
 		public sharedService: SharedService
 	) {
 
-		// this.userService.uid = this.createUID();
 		if (this.sharedService.isServer) return;
 
 		this.router.events.subscribe((routerEvent: Event) => {
 			this.checkRouterEvent(routerEvent);
 		});
-
 
 	}
 
@@ -47,80 +45,52 @@ export class AppComponent implements OnInit {
 
 	}
 	
-	async ngOnInit() {
+	ngOnInit() {
 
-		if (this.sharedService.isServer) return;
+		// if (this.sharedService.isServer) return;
 
-		let uid = this.sharedService.getData('uid');
+		// let uid = this.sharedService.getData('uid');
 
-		if (!uid) {
+		// if (!uid) {
 			
-			// return this.sendUserToLoginScreen();
+		// 	// return this.sendUserToLoginScreen();
 			
-		}
+		// }
 
-		try {
+		// try {
 
-			let user = await this._fire.getUserData(uid);
+		// 	let user = await this._fire.getUserData(uid);
 
-			user = user.val();
+		// 	user = user.val();
 
-			this.sharedService.user = new User();
+		// 	this.sharedService.user = new User();
 
-			this.sharedService.user = {
-				uid: user.uid,
-				name: user.name
-			};
+		// 	this.sharedService.user = {
+		// 		uid: user.uid,
+		// 		name: user.name
+		// 	};
 
-			console.log('this.sharedService.user', this.sharedService.user);
+		// 	console.log('this.sharedService.user', this.sharedService.user);
 
-			// this.sendUserToHomeScreen();
-				
-		} catch (error) {
-			
-			console.log(error);
-
-		}
-		
-		// this.fire
-		// 	.listenToAuthChanges(this.sendUserToHomeScreen.bind(this), this.sendUserToLoginScreen.bind(this))
-		// 	.then(r => {
-
-		// this.fire.isUserLoggedIn().then(r => {
-		// 	if (!r) {
-		// 		this.sendUserToLoginScreen();
-		// 		return;
-		// 	}
 		// 	// this.sendUserToHomeScreen();
-		// }).catch(e => {
-		// 	console.log(e);
-		// 	this.sendUserToLoginScreen();
-		// });
+				
+		// } catch (error) {
+			
+		// 	console.log(error);
 
-		// 	});
-	}
-
-	createUID(): string {
-	
-		let array = [1,2,3,4,5,6,7,8,9, 'a', 'b', 'c'];
-
-		function randomString (): string {
-			let randomNumber = Math.ceil(Math.random() * ( array.length - 1 ) );
-			return array[randomNumber].toString();
-		}
-
-		return randomString() + randomString() + randomString();
+		// }
+		
 
 	}
 
 	sendUserToHomeScreen(): void {
 		this.router.navigate(['home']);
-		console.log('should see home screen');
+		
 	}
 
 	sendUserToLoginScreen(): void {
 
-		this.router.navigate(['']);
+		this.router.navigate(['login']);
 
 	}
 

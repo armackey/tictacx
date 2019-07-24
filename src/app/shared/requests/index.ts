@@ -51,8 +51,9 @@ export class RestRequest {
 	}
 
 	private getBasicUserInformation(): any {
+		let uid = this._sharedService.getData('uid');
 		return {
-			uid: this._sharedService.user && this._sharedService.user.uid ? this._sharedService.user.uid : ''
+			uid: uid === null ? '' : uid
 		};
 	}
 

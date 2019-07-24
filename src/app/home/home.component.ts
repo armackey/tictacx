@@ -57,13 +57,30 @@ export class HomeComponent implements OnInit {
 	}
 
 	async renderGame(gameType: string, numberOfPlayers: number): Promise<any> {
+		
+		let isLoggedIn = !!this._sharedService.user;
+
+		if (!isLoggedIn) {
+
+			let { 
+				user,
+				additionalUserInfo 
+			} = await this._fireService.anonLogin();
+
+			let { uid } = await this._fireService.createAndStoreUser(user, additionalUserInfo);
+
+			this._sharedService.user = {
+				uid: uid
+			}
+
+			this._sharedService.setData('uid', uid);
+
+		}
 
 		let { gameId } = await this.createGame(gameType, numberOfPlayers);
 
-		// this._fireService.addPlayerToGame(gameType, gameId, 'x');
-
 		// needs a second to create game on firebase before navigating
-		setTimeout(() => this._router.navigate([`/game`, gameId]), 500);
+		setTimeout(() => this._router.navigate([`/${gameType}`, gameId]), 500);
 
 		
 
@@ -84,7 +101,7 @@ export class HomeComponent implements OnInit {
 		
 		let { gameId } = await this._restRequest.findGame(gameType, numberOfPlayers);
 
-		this._router.navigate([`/game`, gameId]);
+		this._router.navigate([`/${gameType}`, gameId]);
 
 	}
 

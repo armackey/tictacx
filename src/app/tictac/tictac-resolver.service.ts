@@ -16,7 +16,6 @@ export class TicTacResolver implements Resolve<BoardsResolved> {
 	resolve(route: ActivatedRouteSnapshot) {
 		const id = route.paramMap.get('id');
 		const data = this._fire.getGameData('tictac', id);
-		console.log('this is the id:', id);
 		if (typeof data === null) {
 			return of({
 				error: 'Game doesn\'t exist',

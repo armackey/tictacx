@@ -8,16 +8,16 @@ export const routes: Routes = [
 		component: LoginScreenComponent
 	},
 	{
+		path: 'home',
+		component: HomeComponent,
+	},	
+	{
 		path: '',
-		redirectTo: '',
+		redirectTo: 'home',
 		pathMatch: 'full',
 	},
 	{
-		path: 'home',
-		component: HomeComponent,
-	},
-	{
-		path: 'game',
+		path: 'tictac',
 		loadChildren: './tictac/tictac.module#TictacModule'
 		// loadChildren: () => import('./tictac/tictac.module').then(m => m.TictacModule)
 	}

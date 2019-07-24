@@ -5,6 +5,7 @@ import { auth } from 'firebase/app';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { first } from 'rxjs/operators';
 
 import { SERVER_HOST } from './constants';
 import { RestRequest } from './requests';
@@ -21,7 +22,7 @@ export class FireService implements FireBaseClass {
 		private _afAuth: AngularFireAuth, 
 		private _db: AngularFireDatabase, 
 		private http: HttpClient,
-		private _restRequst: RestRequest,
+		private _restRequest: RestRequest,
 		private _user: UserService
 	) {
 
@@ -42,6 +43,12 @@ export class FireService implements FireBaseClass {
 		// }, error => {
 		// 	console.log(error);
 		// });
+	}
+
+	getCurrentUser(): any {
+		
+		return this._afAuth.authState.pipe(first()).toPromise();
+
 	}
 
 	private getSnapshots(path: string): any {
@@ -123,7 +130,7 @@ export class FireService implements FireBaseClass {
 
 	createGame(gameType: string, numberOfPlayers?: number): Promise<any> {
 		
-		return this._restRequst.createGameId(gameType, numberOfPlayers);
+		return this._restRequest.createGameId(gameType, numberOfPlayers);
 
 	}
 
@@ -146,18 +153,6 @@ export class FireService implements FireBaseClass {
 
 	}
 
-	isUserLoggedIn(): Promise<boolean> {
-		console.log(SERVER_HOST);
-		return this.getUser().then((user) => {
-			if (!user) { return false; }
-			return true;
-		})
-		// return Promise.resolve().then(()=>{
-		// 	const user = this._afAuth.auth.currentUser;
-		// 	const b = user === null || !user ? false : true;
-		// 	return b;
-		// })
-	}
 
 	getUserData(uid: string): Promise<any> {
 
@@ -189,8 +184,6 @@ export class FireService implements FireBaseClass {
 
 		let provider = new auth.FacebookAuthProvider();
 
-		// this._afAuth.auth.currentUser.re
-
 		return this._afAuth.auth.signInWithPopup(provider);
 
 	}
@@ -208,6 +201,54 @@ export class FireService implements FireBaseClass {
 		return this._afAuth.auth.signInAnonymously();
 
 	}	
+
+	async createAndStoreUser(user, additionalUserInfo): Promise<any> {
+
+		let tokenId = await this.getTokenId();
+
+		let { uid, error } = await this._restRequest.verifyTokenId(tokenId);
+
+		if (error) {
+			console.log('error:', error);
+			return;
+		}
+
+		let { isNewUser, profile } = additionalUserInfo;
+
+		let { email, emailVerified, photoURL, refreshToken } = user;
+
+		let data;
+
+		if (profile) {
+
+			let { first_name, last_name, name, picture, id } = profile;
+
+			data = {
+				fbId: id,
+				uid,
+				first_name,
+				last_name,
+				name,
+				photoURL,
+				email,
+				emailVerified,
+				tokenId
+			};
+
+		} else {
+
+			data = {
+				uid,
+				tokenId
+			};
+
+		}
+
+		this.storeUser(data);
+
+		return data;
+
+	}
 
 }
 

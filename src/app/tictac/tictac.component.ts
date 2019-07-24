@@ -24,8 +24,6 @@ export class TictacComponent implements OnInit {
 		private _user: UserService,
 		public _boardService: BoardService,
 	) { 
-		
-		if (this._sharedService.isServer) return;
 
 	}
 
@@ -35,9 +33,16 @@ export class TictacComponent implements OnInit {
 
 		this.routeSub = this._route.data.subscribe(data => {
 
-			console.log(data);
-
 			const { resolvedData } = data;
+
+			if (resolvedData === null) {
+
+				this._router.navigate(['home']);
+
+				this._sharedService.notifyMessage = 'game does not exist';
+				
+				return;
+			}
 
 			const { gameId, boards, numberOfPlayers, userTurn, playerList } = resolvedData;
 
@@ -84,23 +89,11 @@ export class TictacComponent implements OnInit {
 	}
 
 
-	ngAfterViewInit() {
-
-	}
-
-
-	clearBoard(): void {
-
-
-	}
-
 	ngOnDestroy() {
 		
 		if (this.routeSub) {
 			this.routeSub.unsubscribe();
 		}
-
-		this.clearBoard();
 		
 	}
 

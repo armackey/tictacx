@@ -1,11 +1,7 @@
-<Button (click)="clearBoard();">Reset Game</Button>
+
 
 <div>
-	<!-- <button (click)="logout()">logout</button>
-	<button (click)="getUserPosition()">get user position</button>
-	<button (click)="getUserPicture()">get user picture</button> -->
-
-	<!-- <button (click)="getUserLinkedInProfile()">getUserLinkedInProfile</button> -->
+	
 	<div #parent id="grid-container">
 
 		<div *ngFor="let board of _boardService.boards; let i = index">
@@ -15,7 +11,5 @@
 		</div>
 
 	</div>
-
-	<!-- <app-toast *ngIf="showToast" [modalDataToChild]="modalDataFromParent"></app-toast> -->
 
 </div>

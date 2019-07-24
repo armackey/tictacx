@@ -82,7 +82,11 @@ export class LoginScreenComponent implements OnInit {
 				user
 			} = await this.fire.anonLogin();
 
-			this.createAndStoreUser(additionalUserInfo, user);
+			let { uid } = await this.fire.createAndStoreUser(additionalUserInfo, user);
+
+			this._sharedService.setData('uid', uid);
+
+			this._router.navigate(['home']);
 			
 		} catch (error) {
 
@@ -104,72 +108,17 @@ export class LoginScreenComponent implements OnInit {
 				user
 			} = await this.fire.loginFacebook();
 
-			this.createAndStoreUser(additionalUserInfo, user);
+			let { uid } = await this.fire.createAndStoreUser(additionalUserInfo, user);
+
+			this._sharedService.setData('uid', uid);
+
+			this._router.navigate(['home']);			
 
 		} catch(e) {
 
 			console.log(e);
 
 		}
-
-	}
-
-	async createAndStoreUser(additionalUserInfo, user): Promise<any> {
-
-		let tokenId = await this.fire.getTokenId();
-
-		let { uid, error } = await this._restRequest.verifyTokenId(tokenId);
-
-		if (error) {
-			console.log('error:', error);
-			return;
-		}
-
-		let { isNewUser, profile } = additionalUserInfo;
-
-		let { email, emailVerified, photoURL, refreshToken } = user;
-
-		let data;
-
-		if (profile) {
-
-			let { first_name, last_name, name, picture, id } = profile;
-
-			data = {
-				fbId: id,
-				uid,
-				first_name,
-				last_name,
-				name,
-				photoURL,
-				email,
-				emailVerified,
-				tokenId
-			};
-
-		} else {
-
-			data = {
-				uid,
-				tokenId
-			};
-
-		}
-
-		this._sharedService.user = new User();
-
-		this._sharedService.user = {
-			uid: data.uid,
-			name: data.name
-		};
-
-		console.log('this._sharedService.user', this._sharedService.user);
-
-		this.fire.storeUser(data);
-
-		this._sharedService.setData('uid', uid);
-
-		this._router.navigate(['home']);		
 
 	}
 

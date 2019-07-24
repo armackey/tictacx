@@ -35,7 +35,7 @@ export class NavBarComponent implements OnInit {
 
 		this._sharedService.user = undefined;
 
-		this._router.navigate(['']);
+		this._router.navigate(['/login']);
 
 	}
 
