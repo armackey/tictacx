@@ -16,13 +16,15 @@ import { Observable } from 'tns-core-modules/ui/page/page';
 export class TictacComponent implements OnInit {
 
 	routeSub: any;
-
+	isWaitingForPlayers: boolean =  false;
+	sharableLink: string;
+	timeOutId: number;
 	constructor(
 		private _sharedService: SharedService,
 		private _route: ActivatedRoute,
 		private _router: Router,
 		private _user: UserService,
-		public _boardService: BoardService,
+		public boardService: BoardService,
 	) { 
 
 	}
@@ -31,9 +33,12 @@ export class TictacComponent implements OnInit {
 		
 		if (this._sharedService.isServer) return;
 
+		// after 10 seconds notify user to invite friend
+		this.timeOutId = setTimeout(() => this.sharableLink = location.href, 10000);
+
 		this.routeSub = this._route.data.subscribe(data => {
 
-			const { resolvedData } = data;
+			const { resolvedData, inviteResolvedData } = data;
 
 			if (resolvedData === null) {
 
@@ -44,11 +49,11 @@ export class TictacComponent implements OnInit {
 				return;
 			}
 
-			const { gameId, boards, numberOfPlayers, userTurn, playerList } = resolvedData;
+			const { gameId, userTurn } = resolvedData;
 
-			this._boardService.gameId = gameId;
+			this.boardService.gameId = gameId;
 
-			this._boardService.gameType = 'tictac';
+			this.boardService.gameType = 'tictac';
 
 			if (data['isGameOver']) {
 
@@ -58,33 +63,37 @@ export class TictacComponent implements OnInit {
 
 			}
 
-			
+			this.boardService.fireService.listenToMoves('tictac', gameId, (data) => {
+				
+				let { numberOfPlayers, playerList, boards } = data;
 
-			if (!numberOfPlayers || !playerList) {
-				// TODO: stop game from starting
-			}
+				// should only start game once all players have joined
+				if (numberOfPlayers == Object.keys(playerList).length) {
 
-			// should only start game once all players have joined
-			if (numberOfPlayers == Object.keys(playerList).length) {
+					this.isWaitingForPlayers = false;
 
-				this._boardService.setBoardData(boards);
+					this.boardService.setBoardData(data);
 
-			}	
+					this.removeTimeout();
 
+				} else { 
 
+					this.isWaitingForPlayers = true;
 
-			console.log(gameId);
-
-			this._boardService.fireService.listenToMoves('tictac', gameId, (data) => {
-
-				// if (!data) return this._router.navigate(['home']); // if game does not exist send user home
-					this._boardService.setBoardData(data);
-
+				}				
+				
 
 			});	
 
-
 		});
+
+	}
+
+	removeTimeout(): void {
+		
+		if (this.timeOutId) {
+			clearTimeout(this.timeOutId);
+		}
 
 	}
 
@@ -94,6 +103,8 @@ export class TictacComponent implements OnInit {
 		if (this.routeSub) {
 			this.routeSub.unsubscribe();
 		}
+
+		this.removeTimeout();
 		
 	}
 

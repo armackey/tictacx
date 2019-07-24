@@ -9,3 +9,11 @@
 .conquered {
   font-size: 28px;
 }
+
+.opaque {
+	opacity: 0.5;
+}
+
+.share {
+	width: 48%;
+}

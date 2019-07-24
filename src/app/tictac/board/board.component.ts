@@ -25,8 +25,6 @@ export class BoardComponent implements OnInit {
 		private _sharedService: SharedService
 		// private _gameManagerService: GameManagerService
 	) {
-		
-		console.log('loaded');
 
 	}
 
@@ -42,9 +40,6 @@ export class BoardComponent implements OnInit {
 
 		this._board.squares[selectedSquare].symbol = this.bService.assocSymbol;
 
-		// event.target.innerHTML = this.bService.userTurn;
-
-		// this._board.
 		this.board.nativeElement.class = 'active';
 
 		this.bService.setNextUserTurn();
@@ -52,7 +47,7 @@ export class BoardComponent implements OnInit {
 		this.bService.sendMove({
 			activeBoard: data.activeBoard,
 			prevBoard: data.prevBoard,
-			userTurn: this.bService.userTurn, // TODO: set to user id
+			userTurn: this.bService.userTurn,
 			boards: data.boards,
 			winner: data['winner'] || '',
 			isGameOver: data['isGameOver'] || ''
@@ -67,7 +62,7 @@ export class BoardComponent implements OnInit {
 			
 			this._sharedService.notifyMessage = 'not your turn';
 
-			return 
+			return;
 
 		}
 

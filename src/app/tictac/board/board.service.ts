@@ -253,23 +253,31 @@ export class BoardService extends GameManagerService {
 
 	public setBoardData(data: any): void {
 
-		this.prevBoard = data['prevBoard'];
+		let { 
+			boards,
+			prevBoard,
+			activeBoard,
+			playerList,
+			userTurn
+		} = data;
 
-		this.activeBoard = data['activeBoard'];
+		this.prevBoard = prevBoard;
 
-		this.userTurn = data['userTurn'];
+		this.activeBoard = activeBoard;
 
-		this.assocSymbol = data['playerList'][this._sharedService.user.uid].assocSymbol;
+		this.userTurn = userTurn;
 
-		this.playerList = Object.values(data['playerList']);
+		this.assocSymbol = playerList[this._sharedService.user.uid].assocSymbol;
+
+		this.playerList = Object.values(playerList);
 
 		// for new game purposes
 		this.firstTurnHasBeenTaken = this.activeBoard ? true : false; 
 
 		if (this.prevBoard)
-		 	return this.insertBoardOnList(this.prevBoard, data['boards'])
+		 	return this.insertBoardOnList(this.prevBoard, boards)
 
-		this.boards = data['boards'];
+		this.boards = boards;
 
 	}
 

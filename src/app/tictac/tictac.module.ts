@@ -5,12 +5,15 @@ import { BoardService } from './board/board.service';
 import { Routes, RouterModule } from '@angular/router';
 import { TictacComponent } from './tictac.component';
 import { TicTacResolver } from './tictac-resolver.service';
+import { FormsModule } from '@angular/forms';
+import { InviteServiceResolver } from '../invite/invite-resolver.service';
 
 const routes: Routes = [
     { path: "", component: BoardComponent},
 	{ path: ":id", component: TictacComponent, 
 		resolve: { 
-			resolvedData: TicTacResolver 
+			resolvedData: TicTacResolver,
+			inviteResolvedData: InviteServiceResolver
 		} 
 	}
 ];
@@ -27,6 +30,7 @@ export class TictacRoutingModule { }
 		TictacComponent
 	],
 	imports: [
+		FormsModule,
 		CommonModule,
 		TictacRoutingModule
 	],

@@ -1,12 +1,31 @@
 
 
 <div>
-	
-	<div #parent id="grid-container">
 
-		<div *ngFor="let board of _boardService.boards; let i = index">
+	<div 
+		class="cover center"
+		*ngIf="isWaitingForPlayers">
+		
+		<p>searching for opponent</p>
 
-			<app-board [_board]="board" ></app-board>
+		<div *ngIf="sharableLink">
+
+			<p>it's been sometime. invite a friend to play</p>
+
+			<input class="center share" type="text" disabled [(ngModel)]="sharableLink">
+			
+		</div>
+		
+	</div>
+
+	<div #parent id="grid-container" 
+		[ngClass]="{ 
+			'opaque': isWaitingForPlayers === true 
+		}">
+
+		<div *ngFor="let board of boardService.boards; let i = index">
+
+			<app-board [attr.disabled]="isWaitingForPlayers" [_board]="board" ></app-board>
 
 		</div>
 
