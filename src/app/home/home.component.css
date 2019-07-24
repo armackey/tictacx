@@ -16,9 +16,8 @@ button {
 }
 
 .tictac {
-	width: 200px;
-	height: 200px;
-	background-color: red;
+    width: 300px;
+    height: 200px;
 	display: block;
 	margin: 0 auto;
 }
