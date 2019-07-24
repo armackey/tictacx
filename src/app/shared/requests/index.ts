@@ -16,6 +16,12 @@ export class RestRequest {
 
 	}
 
+	public async joinGameByInvite(gameType: string, gameId: string): Promise<any> {
+
+		return this.makeRequest('joinGameByInvite', { gameType, gameId});
+
+	}
+
 	public async findGame(gameType: string, numberOfPlayers?: number): Promise<any> {
 
 		return this.makeRequest('findGame', { gameType, numberOfPlayers})
@@ -28,7 +34,7 @@ export class RestRequest {
 
 	}
 
-	private makeRequest(restUrl: 'createGameId' | 'findGame' | 'verifyTokenId', extras?): Promise<any> {
+	private makeRequest(restUrl: 'createGameId' | 'findGame' | 'verifyTokenId' | 'joinGameByInvite', extras?): Promise<any> {
 
 		let options = this.createRequestOptions();
 
