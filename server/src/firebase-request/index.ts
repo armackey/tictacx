@@ -4,10 +4,11 @@ import * as admin from 'firebase-admin';
 import * as serviceAccount from './admin-credentials.json';
 // var serviceAccount = require("./admin-credentials.json");
 const sAccount = (<any>serviceAccount);
+const config = require('firebase.service.config').getConfig();
 
 admin.initializeApp({
 	credential: admin.credential.cert(sAccount),
-	databaseURL: "https://tictacx-16b0a.firebaseio.com"
+	databaseURL: config.databaseURL
 });
 
 function createGameId(req, res) {
@@ -58,7 +59,7 @@ export async function findGame(req, res, next) {
 	
 	res.send(list[0]);
 	
-};
+}
 
 export async function verifyTokenId(req, res) {
 
@@ -167,6 +168,43 @@ function createTicTacBoards(): Array<any> {
 	});
 
 	return b;
+
+}
+
+export async function joinGameByInvite(req, res) {
+
+	let { uid, gameId, gameType } = req.body;
+
+	let value = await getGameData(gameType, gameId);
+
+	value = value.val();
+
+	const assocSymbol = determineAssocSymbol(gameType, value['playerList']);
+
+	if (!uid) {
+		
+		let data = await createUID();
+
+		uid = data.user.uid;
+
+	}
+
+	addUserToGame(gameType, gameId, uid, assocSymbol);
+
+	res.send({
+		uid
+	});
+}
+
+function getGameData(gameType, gameId) {
+
+	return firebase.database().ref().child(`${gameType}/${gameId}`).once('value');
+
+}
+
+function createUID() {
+
+	return firebase.auth().signInAnonymously();
 
 }
 
