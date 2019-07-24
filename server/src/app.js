@@ -7,7 +7,7 @@ var body_parser_1 = require("body-parser");
 var dotenv_1 = require("dotenv");
 var index_1 = require("./auth/index");
 var cookie_parser_1 = require("cookie-parser");
-var _a = require('./firebase-request'), createGameId = _a.createGameId, findGame = _a.findGame, verifyTokenId = _a.verifyTokenId;
+var _a = require('./firebase-request'), createGameId = _a.createGameId, findGame = _a.findGame, verifyTokenId = _a.verifyTokenId, joinGameByInvite = _a.joinGameByInvite;
 // import * as userControlller from './controllers/user/user.controller';
 var App = /** @class */ (function () {
     function App() {
@@ -49,6 +49,7 @@ var App = /** @class */ (function () {
         this.router.get('/oauth/linkedin/callback', index_1.getAccessToken);
         this.router.post('/createGameId', createGameId);
         this.router.post('/findGame', findGame);
+        this.router.post('/joinGameByInvite', joinGameByInvite);
         // this.router.get('/user', userControlller.get);
         // this.router.get('/user/:name', userControlller.get);
         // this.router.post('/user', userControlller.insert);
