@@ -32,12 +32,12 @@ const APP_ID = 'tictacx';
 		NavBarComponent,
 	],
 	imports: [
+		FormsModule,
 		BrowserModule,
 		AppRoutingModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFireDatabaseModule,
 		AngularFireAuthModule,
-		FormsModule,
 		HttpClientModule,
 		BrowserTransferStateModule,
 		BrowserModule.withServerTransition({ appId: APP_ID }),

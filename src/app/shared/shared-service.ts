@@ -72,6 +72,20 @@ export class SharedService {
 
 	}
 
+	setUidOnSharedUser() {
+		
+		let uid = this.getData('uid');
+
+		if (uid) {
+			
+			this.user = new User();
+			
+			this.user.uid = uid;
+
+		}
+
+	}
+
 
 	public setData(name: string, data: any): void {
 		

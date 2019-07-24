@@ -47,39 +47,9 @@ export class AppComponent implements OnInit {
 	
 	ngOnInit() {
 
-		// if (this.sharedService.isServer) return;
+		if (this.sharedService.isServer) return;
 
-		// let uid = this.sharedService.getData('uid');
-
-		// if (!uid) {
-			
-		// 	// return this.sendUserToLoginScreen();
-			
-		// }
-
-		// try {
-
-		// 	let user = await this._fire.getUserData(uid);
-
-		// 	user = user.val();
-
-		// 	this.sharedService.user = new User();
-
-		// 	this.sharedService.user = {
-		// 		uid: user.uid,
-		// 		name: user.name
-		// 	};
-
-		// 	console.log('this.sharedService.user', this.sharedService.user);
-
-		// 	// this.sendUserToHomeScreen();
-				
-		// } catch (error) {
-			
-		// 	console.log(error);
-
-		// }
-		
+		this.sharedService.setUidOnSharedUser();
 
 	}
 

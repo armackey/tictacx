@@ -51,8 +51,6 @@ export class HomeComponent implements OnInit {
 	ngOnInit() {
 
 		if (this.service.isServer) return;
-
-		console.log('home component loaded');
 		
 	}
 
@@ -71,7 +69,7 @@ export class HomeComponent implements OnInit {
 
 			this._sharedService.user = {
 				uid: uid
-			}
+			};
 
 			this._sharedService.setData('uid', uid);
 

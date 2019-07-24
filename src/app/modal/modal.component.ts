@@ -87,7 +87,6 @@ export class ModalComponent implements OnInit {
 		
 		if (this._sharedService.isServer) return;
 
-		console.log('ModalComponent destroyed')
 	}
 
 }
