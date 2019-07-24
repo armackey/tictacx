@@ -15,7 +15,7 @@ import {
 } from './auth/index';
 import cookieParser from 'cookie-parser';
 
-const { createGameId, findGame, verifyTokenId}  = require('./firebase-request');
+const { createGameId, findGame, verifyTokenId, joinGameByInvite}  = require('./firebase-request');
 // import * as userControlller from './controllers/user/user.controller';
 
 export class App {
@@ -76,6 +76,8 @@ export class App {
 		this.router.post('/createGameId', createGameId);
 
 		this.router.post('/findGame', findGame);
+
+		this.router.post('/joinGameByInvite', joinGameByInvite)
 		// this.router.get('/user', userControlller.get);
 		// this.router.get('/user/:name', userControlller.get);
 		// this.router.post('/user', userControlller.insert);
